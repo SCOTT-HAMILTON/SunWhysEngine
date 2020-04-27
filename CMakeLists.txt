@@ -36,7 +36,9 @@ add_executable(sunwhysengine
         src/States/GameManager.h
         src/States/State.cpp
         src/Behaviors/Behavior.cpp
-        src/Behaviors/Behavior.h)
+        src/Behaviors/Behavior.h
+        src/Wrappers/LuaWrappers.h
+        src/Wrappers/LuaWrappers.cpp)
 
 # Link libraries
 target_link_libraries(sunwhysengine sfml-graphics Lua::lua_lib sol2::sol2)

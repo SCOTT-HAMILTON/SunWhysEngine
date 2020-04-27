@@ -1,19 +1,37 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-#include "SunWhysEngine.h"
+#include "Wrappers/LuaWrappers.h"
+#include <string>
+#include <sstream>
+#include <vector>
+
 
 void loader() {
-    SunWhysEngine sunWhysEngine;
+    LuaWrappers luaWrappers;
 
     std::ifstream file("./loader.tf");
+    int extension = -1;
 
     if (file.is_open()) {
         std::string line;
 
         while (std::getline(file, line)) {
-            std::cout << "Loading the " << line << " file" << std::endl;
-            sunWhysEngine.m_addFile(line);
+            if (line == "lang=lua")
+            {
+                extension = 0;
+                continue;
+            }
+
+            switch (extension) {
+                case -1:
+                    std::cout << "Extension not found" << std::endl;
+                break;
+                case 0:
+                    std::cout << "Loading the " << line << " file" << std::endl;
+                    luaWrappers.m_addFile(line);
+                break;
+            }
         }
 
         file.close();
