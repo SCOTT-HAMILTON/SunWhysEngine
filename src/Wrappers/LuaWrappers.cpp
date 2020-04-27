@@ -2,7 +2,8 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 #include "../States/GameManager.h"
-#include "../Behaviors/Behavior.h"
+#include "../Sprites/Sprites.h"
+#include "../Physics/Physics.h"
 
 LuaWrappers::LuaWrappers() {
     m_loadLibraries();
@@ -28,9 +29,12 @@ LuaWrappers::LuaWrappers() {
 
     m_loadBehavior();
     std::cout << "Load Behaviors" << std::endl;
+
+    m_loadPhysics();
+    std::cout << "Load Physics" << std::endl;
 }
 
-void LuaWrappers::m_addFile(const std::string& filename) { lua.script_file("./scripts/" + filename); }
+void LuaWrappers::addFile(const std::string& filename) { lua.script_file("./scripts/" + filename); }
 
 void LuaWrappers::m_loadLibraries() { lua.open_libraries(sol::lib::base, sol::lib::package, sol::lib::math, sol::lib::table); }
 
@@ -80,7 +84,7 @@ void LuaWrappers::m_loadGameManager() {
             "update", &GameManager::update);
 }
 
-void LuaWrappers::m_loadState() { lua.new_usertype<State>("State", sol::constructors<State(std::string&, sol::function&, sol::function&, sol::function&)>()); }
+void LuaWrappers::m_loadState() { lua.new_usertype<State>("Scenes", sol::constructors<State(std::string&, sol::function&, sol::function&, sol::function&)>()); }
 
 void LuaWrappers::m_keyboardBinding() {
 
@@ -189,12 +193,20 @@ void LuaWrappers::m_keyboardBinding() {
 }
 
 void LuaWrappers::m_loadBehavior() {
-    auto behavior = lua.new_usertype<Behavior>("Behavior", sol::constructors<Behavior(sf::RenderWindow, std::string, float, float)>(),
-                               "draw", &Behavior::draw);
+    auto behavior = lua.new_usertype<Sprites>("Sprites", sol::constructors<Sprites(sf::RenderWindow, std::string, float, float)>(),
+                               "draw", &Sprites::draw);
 
-    behavior.set("x", &Behavior::m_x);
-    behavior.set("y", &Behavior::m_y);
+    behavior.set("x", &Sprites::x);
+    behavior.set("y", &Sprites::y);
+    behavior.set("hitbox", &Sprites::hitbox);
 
-    lua.new_usertype<sf::Sprite>("Sprite", sol::constructors<sf::Sprite>());
+    lua.new_usertype<sf::Sprite>("St", sol::constructors<sf::Sprite>());
+
+    lua.new_usertype<sf::FloatRect>("FloatRect", sol::constructors<sf::FloatRect>());
+}
+
+void LuaWrappers::m_loadPhysics() {
+    lua.new_usertype<Physics>("Physics", sol::constructors<Physics>(),
+                              "collide", &Physics::Intersect);
 }
 

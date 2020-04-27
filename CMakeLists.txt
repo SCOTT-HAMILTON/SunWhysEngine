@@ -29,16 +29,16 @@ add_subdirectory("3rd/sol2")
 # Create executable
 add_executable(sunwhysengine
         src/Main.cpp
-        src/SunWhysEngine.cpp
-        src/SunWhysEngine.h
         src/States/State.h
         src/States/GameManager.cpp
         src/States/GameManager.h
         src/States/State.cpp
-        src/Behaviors/Behavior.cpp
-        src/Behaviors/Behavior.h
+        src/Sprites/Sprites.cpp
+        src/Sprites/Sprites.h
         src/Wrappers/LuaWrappers.h
-        src/Wrappers/LuaWrappers.cpp)
+        src/Wrappers/LuaWrappers.cpp
+        src/Physics/Physics.h
+        src/Physics/Physics.cpp)
 
 # Link libraries
 target_link_libraries(sunwhysengine sfml-graphics Lua::lua_lib sol2::sol2)

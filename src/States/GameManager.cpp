@@ -9,25 +9,25 @@ void GameManager::pushState(const State& state) { states.push_back(state); }
 
 void GameManager::goToScene(std::string title) {
     for (const auto& state : states)
-        if (state.m_title == title) {
-            state.m_initialization();
+        if (state.title == title) {
+            state.initialization();
             m_currentState = std::move(title);
         }
 }
 
 void GameManager::render() {
     for (const auto& state : states)
-        if (state.m_title == m_currentState)
-            state.m_render();
+        if (state.title == m_currentState)
+            state.render();
 }
 
 void GameManager::update() {
     for (const auto& state : states)
-        if (state.m_title == m_currentState)
-            state.m_update();
+        if (state.title == m_currentState)
+            state.update();
 }
 
 void GameManager::close() {
     for (const auto& state : states)
-        std::cout << "Close " << state.m_title << std::endl;
+        std::cout << "Close " << state.title << std::endl;
 }

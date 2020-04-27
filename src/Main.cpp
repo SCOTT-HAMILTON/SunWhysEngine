@@ -29,7 +29,7 @@ void loader() {
                 break;
                 case 0:
                     std::cout << "Loading the " << line << " file" << std::endl;
-                    luaWrappers.m_addFile(line);
+                    luaWrappers.addFile(line);
                 break;
             }
         }

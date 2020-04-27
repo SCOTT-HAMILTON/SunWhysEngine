@@ -7,7 +7,7 @@
 class LuaWrappers {
 public:
     LuaWrappers();
-    void m_addFile(const std::string& filename);
+    void addFile(const std::string& filename);
 private:
     sol::state lua;
     void m_loadLibraries();
@@ -18,6 +18,7 @@ private:
     void m_loadState();
     void m_keyboardBinding();
     void m_loadBehavior();
+    void m_loadPhysics();
 };
 
 
