@@ -9,15 +9,15 @@
 
 class GameManager {
 private:
-    std::vector<State> states;
-    std::string m_currentState;
+  std::vector<State> states;
+  std::string m_currentState;
 public:
-    GameManager();
-    void goToScene(std::string title);
-    void render();
-    void update();
-    void pushState(const State& state);
-    void close();
+  GameManager();
+  void goToScene(std::string title);
+  void render();
+  void update();
+  void pushState(const State& state);
+  void close();
 };
 
 

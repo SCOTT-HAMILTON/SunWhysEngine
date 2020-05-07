@@ -5,8 +5,8 @@
 
 class Physics {
 public:
-    Physics();
-    const bool Intersect(Sprites& entity1, Sprites& entity2);
+  Physics();
+  const bool Intersect(Sprites& entity1, Sprites& entity2);
 };
 
 
