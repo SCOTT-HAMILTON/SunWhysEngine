@@ -2,3 +2,5 @@ cmake-build-debug
 3rd/sol2
 .idea
 CMakeLists.txt.user
+build
+build.sh

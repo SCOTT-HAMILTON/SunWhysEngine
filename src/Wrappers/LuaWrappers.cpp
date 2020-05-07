@@ -199,10 +199,6 @@ void LuaWrappers::m_loadBehavior() {
     behavior.set("x", &Sprites::x);
     behavior.set("y", &Sprites::y);
     behavior.set("hitbox", &Sprites::hitbox);
-
-    lua.new_usertype<sf::Sprite>("St", sol::constructors<sf::Sprite>());
-
-    lua.new_usertype<sf::FloatRect>("FloatRect", sol::constructors<sf::FloatRect>());
 }
 
 void LuaWrappers::m_loadPhysics() {
