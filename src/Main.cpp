@@ -8,39 +8,42 @@
 
 
 void loader() {
-  LuaWrappers luaWrappers;
-  std::ifstream file("./loader.tf");
-  int extension = -1;
+    LuaWrappers luaWrappers;
 
-  if (file.is_open()) {
-    std::string line;
+    std::ifstream file("./loader.tf");
+    int extension = -1;
 
-    while (std::getline(file, line)) {
-      if (line == "lang=lua")
-      {
-        extension = 0;
-        continue;
-      }
+    if (file.is_open()) {
+        std::string line;
 
-      switch (extension) {
-        case -1:
-          std::cout << "Extension not found" << std::endl;
-          break;
-        case 0:
-          LuaWrappers luaWrappers;
-          std::cout << "Loading the " << line << " file" << std::endl;
-          luaWrappers.addFile(line);
-          break;
+        while (std::getline(file, line)) {
+            if (line == "lang=lua")
+            {
+                extension = 0;
+                continue;
+            }
+
+            switch (extension) {
+                case -1:
+                    std::cout << "Extension not found" << std::endl;
+                break;
+                case 0:
+                    std::cout << "Loading the " << line << " file" << std::endl;
+                    luaWrappers.addFile(line);
+                break;
+            }
         }
-      }
 
-      file.close();
+        file.close();
     } else
-      std::cout << "The loader file was not found." << std::endl;
+        std::cout << "The loader file was not found." << std::endl;
 }
 
 int main() {
-  loader();
+    loader();
 
-  return EXIT_SUCCESS;
+    /* auto finish = 0; */
+    /* std::cin >> finish; */
+
+    return EXIT_SUCCESS;
 }
