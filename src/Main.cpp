@@ -42,8 +42,8 @@ void loader() {
 int main() {
     loader();
 
-    auto finish = 0;
-    std::cin >> finish;
+    /* auto finish = 0; */
+    /* std::cin >> finish; */
 
     return EXIT_SUCCESS;
 }

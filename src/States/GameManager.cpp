@@ -1,7 +1,10 @@
 #include "GameManager.h"
 #include <iostream>
 
-GameManager::GameManager() = default;
+GameManager::GameManager() : 
+    lastUpdateTime(std::chrono::high_resolution_clock::now())
+
+{}
 
 std::vector<State> states;
 
@@ -22,9 +25,14 @@ void GameManager::render() {
 }
 
 void GameManager::update() {
+    auto now = std::chrono::high_resolution_clock::now();
+    float dt = (now-lastUpdateTime).count()/10'000'000.0;
+    lastUpdateTime = now;
+
+
     for (const auto& state : states)
         if (state.title == m_currentState)
-            state.update();
+            state.update(dt);
 }
 
 void GameManager::close() {

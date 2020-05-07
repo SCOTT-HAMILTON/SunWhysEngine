@@ -1,7 +1,7 @@
 #ifndef SUNWHYSENGINE_GAMEMANAGER_H
 #define SUNWHYSENGINE_GAMEMANAGER_H
 
-
+#include <chrono>
 #include <memory>
 #include <vector>
 #include <sol/function.hpp>
@@ -18,6 +18,9 @@ public:
     void update();
     void pushState(const State& state);
     void close();
+
+private:
+    std::chrono::high_resolution_clock::time_point lastUpdateTime;
 };
 
 
